@@ -4,10 +4,7 @@ import fsPromises from "node:fs/promises";
 
 async function cmd_up() {
   const parent = path.dirname(getCwd());
-  if (!isInsideRoot(parent)) {
-    // don't change if tries to go above root
-    return;
-  }
+  if (!isInsideRoot(parent)) return;
   setCwd(parent)
 }
 
@@ -27,9 +24,17 @@ async function cmd_cd(args) {
 async function cmd_ls() {
   try {
     const items = await fsPromises.readdir(getCwd(), {withFileTypes: true});
-    // directories first, then files, both alphabetical asc
-    const dirs = items.filter(d => d.isDirectory()).map(d => d.name).sort((a, b) => a.localeCompare(b));
-    const files = items.filter(d => d.isFile()).map(d => d.name).sort((a, b) => a.localeCompare(b));
+
+    const dirs = items
+      .filter(d => d.isDirectory())
+      .map(d => d.name)
+      .sort((a, b) => a.localeCompare(b));
+
+    const files = items
+      .filter(d => d.isFile())
+      .map(d => d.name)
+      .sort((a, b) => a.localeCompare(b));
+
     const rows = [
       ...dirs.map(name => ({name, type: 'directory'})),
       ...files.map(name => ({name, type: 'file'}))

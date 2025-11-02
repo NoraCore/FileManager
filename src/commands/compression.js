@@ -12,7 +12,7 @@ async function cmd_compress(args) {
   try {
     const stat = await fsPromises.stat(src);
     if (!stat.isFile()) return operationFailed();
-    // ensure dest directory exists
+
     const destDir = path.dirname(dest);
     await fsPromises.access(destDir);
     const rs = fs.createReadStream(src);

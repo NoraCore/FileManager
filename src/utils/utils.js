@@ -8,13 +8,12 @@ const OPERATION_FAILED = 'Operation failed';
 const INVALID_INPUT = 'Invalid input';
 const rootPath = path.parse(homeDir).root;
 
-// normalize path for comparisons
 const norm = p => path.resolve(p);
 
 const isInsideRoot = (p) => {
   const resolved = norm(p);
   const r = path.resolve(rootPath);
-  // ensure we don't allow escaping the root. safe prefix-check.
+
   return resolved === r || resolved.startsWith(r);
 };
 const invalidInput = () => console.log(INVALID_INPUT);
@@ -25,7 +24,7 @@ const printCwd = () => {
 }
 const getCwd = () => cwd;
 const setCwd = (newPath) => { cwd = newPath; };
-// Resolve user-provided path relative to current working dir (or absolute)
+
 const resolveTarget = (maybePath) => {
   if (path.isAbsolute(maybePath)) return path.resolve(maybePath);
   return path.resolve(cwd, maybePath);
@@ -34,14 +33,14 @@ const resolveTarget = (maybePath) => {
 const parseStartupArgs = (args) => {
   const out = {};
   for (const token of args) {
-    // accept --username=name or --username name
+
     if (token.startsWith('--')) {
       const [k, v] = token.includes('=') ? token.split('=') : [token, null];
       const key = k.replace(/^--/, '');
       out[key] = v;
     }
   }
-  // support --username name (space separated)
+
   for (let i = 0; i < args.length; i++) {
     if (args[i].startsWith('--') && !args[i].includes('=') && args[i + 1] && !args[i + 1].startsWith('--')) {
       out[args[i].replace(/^--/, '')] = args[i + 1];

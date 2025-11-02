@@ -6,8 +6,11 @@ import {cmd_hash} from "./hash.js";
 import {cmd_compress, cmd_decompress} from "./compression.js";
 import {COMMANDS} from "../constants/constants.js";
 
-const dispatch = async (line, gracefulExit) => {
-  const tokens = line.trim().split(/\s+/).filter(Boolean);
+const dispatch = async (line, exit) => {
+  const tokens = line
+    .trim()
+    .split(/\s+/).filter(Boolean);
+
   if (tokens.length === 0) return;
   const cmd = tokens[0];
   const args = tokens.slice(1);
@@ -58,7 +61,7 @@ const dispatch = async (line, gracefulExit) => {
         break;
       case COMMANDS.EXIT.command:
       case COMMANDS.EXIT.alias:
-        gracefulExit();
+        exit();
         return;
       default:
         invalidInput();

@@ -17,7 +17,6 @@ async function cmd_hash(args) {
       async function* (source) {
         for await (const chunk of source) {
           hash.update(chunk);
-          // not passing chunks to stdout; we just yield to consume pipeline
           yield chunk;
         }
       }
