@@ -1,0 +1,15 @@
+{
+  "name": "file_manager_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:user": "node index.js --username=Jack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Julia Krivonos",
+  "license": "ISC",
+  "type": "commonjs"
+}
