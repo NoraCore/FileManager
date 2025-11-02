@@ -1,8 +1,8 @@
 import fsPromises from "node:fs/promises";
 import path from "node:path";
-import {pipeline} from "node:stream/promises";
+import { pipeline } from "node:stream/promises";
 import fs from "node:fs";
-import {cwd, invalidInput, operationFailed, resolveTarget} from "../utils/utils.js";
+import { getCwd, invalidInput, operationFailed, resolveTarget } from "../utils/utils.js";
 
 
 async function cmd_cat(args) {
@@ -23,7 +23,7 @@ async function cmd_cat(args) {
 
 async function cmd_add(args) {
   if (!args[0]) return invalidInput();
-  const file = path.join(cwd, args[0]);
+  const file = path.join(getCwd(), args[0]);
   try {
     // fail if exists
     await fsPromises.open(file, 'wx').then(h => h.close());
@@ -34,7 +34,7 @@ async function cmd_add(args) {
 
 async function cmd_mkdir(args) {
   if (!args[0]) return invalidInput();
-  const dir = path.join(cwd, args[0]);
+  const dir = path.join(getCwd(), args[0]);
   try {
     await fsPromises.mkdir(dir, {recursive: false});
   } catch (err) {

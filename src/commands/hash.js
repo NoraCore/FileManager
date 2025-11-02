@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
-import {pipeline} from 'node:stream/promises';
-import {createHash} from 'node:crypto';
-import {invalidInput, operationFailed, resolveTarget} from "../utils/utils.js";
+import { pipeline } from 'node:stream/promises';
+import { createHash } from 'node:crypto';
+import { invalidInput, operationFailed, resolveTarget } from "../utils/utils.js";
 
 async function cmd_hash(args) {
   if (!args[0]) return invalidInput();

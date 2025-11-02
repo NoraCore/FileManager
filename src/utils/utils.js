@@ -6,8 +6,6 @@ let cwd = homeDir;
 
 const OPERATION_FAILED = 'Operation failed';
 const INVALID_INPUT = 'Invalid input';
-const CURRENTLY_IN_PATH = `You are currently in ${cwd}`;
-
 const rootPath = path.parse(homeDir).root;
 
 // normalize path for comparisons
@@ -21,8 +19,12 @@ const isInsideRoot = (p) => {
 };
 const invalidInput = () => console.log(INVALID_INPUT);
 const operationFailed = () => console.log(OPERATION_FAILED);
-const printCwd = () => console.log(CURRENTLY_IN_PATH);
-
+const printCwd = () => {
+  const CURRENTLY_IN_PATH = `You are currently in ${cwd}`;
+  console.log(CURRENTLY_IN_PATH);
+}
+const getCwd = () => cwd;
+const setCwd = (newPath) => { cwd = newPath; };
 // Resolve user-provided path relative to current working dir (or absolute)
 const resolveTarget = (maybePath) => {
   if (path.isAbsolute(maybePath)) return path.resolve(maybePath);
@@ -49,7 +51,8 @@ const parseStartupArgs = (args) => {
 };
 
 export {
-  cwd,
+  getCwd,
+  setCwd,
   isInsideRoot,
   invalidInput,
   operationFailed,
