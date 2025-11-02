@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import readline from 'node:readline';
 import { parseStartupArgs, printCwd } from "./src/utils/utils.js";
 import { dispatch } from "./src/commands/dispatcher.js";
