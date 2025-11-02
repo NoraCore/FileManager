@@ -30,7 +30,9 @@ rl.on('line', async (line) => {
   await dispatch(line, exit);
   printCwd();
   rl.prompt();
-}).on('close', () => {
+});
+
+rl.on('close', () => {
   console.log(`Thank you for using File Manager, ${username}, goodbye!`);
   process.exit(0);
 });
