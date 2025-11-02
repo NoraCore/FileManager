@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start:user": "node index.js --username=Jack",
+    "start:user": "node index.js --username=JK",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Julia Krivonos",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
