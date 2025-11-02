@@ -12,14 +12,13 @@ const rl = readline.createInterface({
   prompt: '>'
 });
 
-const gracefulExit = () => {
-  console.log(`Thank you for using File Manager, ${username}, goodbye!`);
+const exit = () => {
   rl.close();
   process.exit(0);
 };
 
 // ctrl+c handling
-process.on('SIGINT', () => gracefulExit());
+process.on('SIGINT', () => exit());
 
 // startup
 console.log(`Welcome to the File Manager, ${username}!`);
@@ -27,7 +26,7 @@ printCwd();
 rl.prompt();
 
 rl.on('line', async (line) => {
-  await dispatch(line);
+  await dispatch(line, exit);
   printCwd();
   rl.prompt();
 }).on('close', () => {
