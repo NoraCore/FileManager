@@ -13,7 +13,7 @@ async function cmd_cat(args) {
     if (!stat.isFile()) return operationFailed();
     const rs = fs.createReadStream(file, {encoding: 'utf8'});
     // stream to stdout
-    await pipeline(rs, process.stdout);
+    await pipeline(rs, process.stdout,  {end: false});
     // ensure newline after done
     process.stdout.write('\n');
   } catch (err) {
