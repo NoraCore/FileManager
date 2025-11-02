@@ -1,6 +1,6 @@
 import os from "node:os";
-import {invalidInput} from "../utils/utils.js";
-import {COMMANDS} from "../constants/constants.js";
+import { invalidInput } from "../utils/utils.js";
+import { COMMANDS } from "../constants/constants.js";
 
 function cmd_os(args) {
   const flag = args[0];

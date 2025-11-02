@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';
-import {pipeline} from 'node:stream/promises';
-import {createBrotliCompress, createBrotliDecompress} from 'node:zlib';
-import {invalidInput, operationFailed, resolveTarget} from "../utils/utils.js";
+import { pipeline } from 'node:stream/promises';
+import { createBrotliCompress, createBrotliDecompress } from 'node:zlib';
+import { invalidInput, operationFailed, resolveTarget } from "../utils/utils.js";
 
 async function cmd_compress(args) {
   if (!args[0] || !args[1]) return invalidInput();

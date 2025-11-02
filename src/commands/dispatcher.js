@@ -1,10 +1,10 @@
-import {invalidInput, operationFailed} from "../utils/utils.js";
-import {cmd_cd, cmd_ls, cmd_up} from "./navigation.js";
-import {cmd_add, cmd_cat, cmd_cp, cmd_mkdir, cmd_mv, cmd_rm, cmd_rn} from "./files.js";
-import {cmd_os} from "./osInfo.js";
-import {cmd_hash} from "./hash.js";
-import {cmd_compress, cmd_decompress} from "./compression.js";
-import {COMMANDS} from "../constants/constants.js";
+import { invalidInput, operationFailed } from "../utils/utils.js";
+import { cmd_cd, cmd_ls, cmd_up } from "./navigation.js";
+import { cmd_add, cmd_cat, cmd_cp, cmd_mkdir, cmd_mv, cmd_rm, cmd_rn } from "./files.js";
+import { cmd_os } from "./osInfo.js";
+import { cmd_hash } from "./hash.js";
+import { cmd_compress, cmd_decompress } from "./compression.js";
+import { COMMANDS } from "../constants/constants.js";
 
 const dispatch = async (line, exit) => {
   const tokens = line
