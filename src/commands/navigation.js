@@ -1,5 +1,5 @@
 import path from "node:path";
-import { getCwd, setCwd, invalidInput, isInsideRoot, operationFailed, resolveTarget } from "../utils/utils.js";
+import {getCwd, setCwd, invalidInput, isInsideRoot, operationFailed, resolveTarget} from "../utils/utils.js";
 import fsPromises from "node:fs/promises";
 
 async function cmd_up() {
@@ -23,28 +23,27 @@ async function cmd_cd(args) {
 
 async function cmd_ls() {
   try {
-    const items = await fsPromises.readdir(getCwd(), {withFileTypes: true});
+    const items = await fsPromises.readdir(getCwd(), { withFileTypes: true });
 
     const dirs = items
       .filter(d => d.isDirectory())
-      .map(d => d.name)
-      .sort((a, b) => a.localeCompare(b));
+      .map(d => ({ name: d.name, type: 'directory' }));
 
     const files = items
       .filter(d => d.isFile())
-      .map(d => d.name)
-      .sort((a, b) => a.localeCompare(b));
+      .map(d => ({ name: d.name, type: 'file' }));
 
     const rows = [
-      ...dirs.map(name => ({name, type: 'directory'})),
-      ...files.map(name => ({name, type: 'file'}))
+      ...dirs.sort((a, b) => a.name.localeCompare(b.name)),
+      ...files.sort((a, b) => a.name.localeCompare(b.name))
     ];
-    for (const r of rows) {
-      console.log(`${r.name}\t${r.type}`);
-    }
+
+    const tableRows = rows
+      .map((r, i) => ({'#': i + 1, Name: r.name, Type: r.type}));
+    console.table(tableRows);
   } catch (err) {
     operationFailed();
   }
 }
 
-export { cmd_up, cmd_cd, cmd_ls };
+export {cmd_up, cmd_cd, cmd_ls};
